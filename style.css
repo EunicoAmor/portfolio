@@ -115,6 +115,7 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+    
 }
 
 a {
@@ -1405,5 +1406,188 @@ ul {
         flex-direction: column;
         gap: 15px;
         align-items: center;
+    }
+}
+
+/* ==========================================================================
+   Logo Divider Section (Infinite Rotating Logo)
+   ========================================================================== */
+.logo-divider-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0;
+    position: relative;
+    z-index: 10;
+}
+
+.rotating-logo {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    border-radius: 50%;
+    box-shadow: var(--shadow-md), var(--shadow-glow);
+    animation: rotate-logo 25s linear infinite; /* Slightly slowed down for larger size to look premium */
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.rotating-logo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 35px hsla(184, 100%, 50%, 0.45);
+}
+
+@keyframes rotate-logo {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================================================
+   Tech Stack Carousel Section
+   ========================================================================== */
+.techstack-carousel-section {
+    padding: 60px 0 80px;
+    background: transparent;
+    overflow: hidden;
+}
+
+.carousel-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.carousel-title h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+    position: relative;
+    display: inline-block;
+}
+
+.carousel-title h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background: var(--grad-primary);
+    border-radius: 2px;
+}
+
+.techstack-carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+/* Gradient fade overlays for sides */
+.techstack-carousel-container::before,
+.techstack-carousel-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.techstack-carousel-container::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-main) 0%, transparent 100%);
+}
+
+.techstack-carousel-container::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-main) 0%, transparent 100%);
+}
+
+.techstack-carousel-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-carousel 30s linear infinite;
+}
+
+.techstack-logo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    margin: 0 30px;
+    flex-shrink: 0;
+    transition: transform var(--transition-fast);
+}
+
+.techstack-logo-item:hover {
+    transform: translateY(-8px);
+}
+
+.techstack-logo-item img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 12px;
+    object-fit: contain;
+    transition: filter var(--transition-fast);
+}
+
+.techstack-logo-item span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+}
+
+.techstack-logo-item:hover span {
+    color: var(--primary);
+}
+
+/* Dark mode theme filter overrides for dark/black SVGs */
+[data-theme="dark"] .techstack-logo-item img[src*="github"] {
+    filter: invert(1) brightness(2);
+}
+[data-theme="dark"] .techstack-logo-item img[src*="flask"] {
+    filter: invert(1) brightness(2);
+}
+
+
+
+@keyframes scroll-carousel {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .logo-divider-container {
+        padding: 40px 0;
+    }
+    .rotating-logo {
+        width: 160px;
+        height: 160px;
+    }
+    .techstack-logo-item {
+        width: 100px;
+        margin: 0 15px;
+    }
+    .techstack-logo-item img {
+        width: 40px;
+        height: 40px;
+    }
+    .techstack-carousel-container::before,
+    .techstack-carousel-container::after {
+        width: 60px;
     }
 }
